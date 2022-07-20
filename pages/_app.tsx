@@ -13,9 +13,9 @@ const progress = new ProgressBar({
   delay: 200
 });
 
-Router.events.on('routeChangeStart', progress.start)
-Router.events.on('routeChangeComplete', progress.finish)
-Router.events.on('routeChangeError', progress.finish)
+Router.events.on('routeChangeStart', progress.start);
+Router.events.on('routeChangeComplete', progress.finish);
+Router.events.on('routeChangeError', progress.finish);
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

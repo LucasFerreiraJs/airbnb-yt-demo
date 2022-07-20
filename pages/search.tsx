@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import { placeToRent } from "../types";
 import { InfoCard } from "../components/InfoCard";
+import { Map } from "../components/Map";
 
 interface IParamsProps {
   resolvedUrl: string
@@ -57,6 +58,10 @@ export default function Search({ resolvedUrl, placesSeachResults }: IParamsProps
               })
             }
           </div>
+        </section>
+
+        <section className="hidden xl:inline-flex xl:min-w-[600px]">
+            <Map placesSeachResults={placesSeachResults}/>
         </section>
       </main>
     </div>
