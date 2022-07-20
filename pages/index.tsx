@@ -1,11 +1,11 @@
 import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { Header } from '../components/Header'
-import { Banner } from '../components/Banner'
-import { ContentHome } from '../components/ExploreNearby'
+import { Header } from '../components/base/Header'
+import { Banner } from '../components/home/Banner'
+import { ContentHome } from '../components/home/ContentHome'
 import { nearbyLocale, cardsLocale } from '../types'
-import { Footer } from '../components/Footer'
+import { Footer } from '../components/base/Footer'
 
 
 
@@ -26,10 +26,7 @@ export function Home({ exploreDataNearby, cardsData }: IExploreData) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* Header */}
-      <Header />
-
-      {/* Banner */}
+      {/* <Header /> */}
       <Banner />
 
       <main
@@ -38,10 +35,10 @@ export function Home({ exploreDataNearby, cardsData }: IExploreData) {
           sm:px-16
         "
       >
-        <ContentHome locations={exploreDataNearby} cards={cardsData}/>
-
+        <ContentHome locations={exploreDataNearby} cards={cardsData} />
       </main>
-    <Footer />
+
+      {/* <Footer /> */}
     </div>
   )
 }

@@ -1,8 +1,8 @@
 import { GetStaticProps } from "next"
-import { nearbyLocale, cardsLocale } from '../types'
-import { LargeCard } from "./LargeCard";
-import { MediumCard } from "./MediumCard";
-import { SmallCard } from "./SmallCard";
+import { nearbyLocale, cardsLocale } from '../../types'
+import { LargeCard } from "../LargeCard";
+import { MediumCard } from "../MediumCard";
+import { SmallCard } from "../SmallCard";
 
 
 interface ILocations {
@@ -12,7 +12,7 @@ interface ILocations {
 
 
 export function ContentHome({ locations, cards }: ILocations) {
-  console.log('cards', cards)
+
   return (
     <>
       <section className="pt-6">

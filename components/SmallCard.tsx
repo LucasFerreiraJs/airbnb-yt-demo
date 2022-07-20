@@ -9,7 +9,7 @@ interface ILocale {
 
 export function SmallCard({ locale }: ILocale) {
 
-  console.log('locale', locale)
+
   return (
     <div
       className='
