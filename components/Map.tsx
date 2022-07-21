@@ -25,6 +25,8 @@ interface IMapProps {
 
 export function Map({ placesSeachResults }: IMapProps) {
 
+  const [selectedLocation, setSelectedLocation] = useState<placeToRent>({} as placeToRent);
+
   const coordinates = placesSeachResults.map(result => ({
     longitude: result.long,
     latitude: result.lat
@@ -43,50 +45,60 @@ export function Map({ placesSeachResults }: IMapProps) {
     zoom: 11
   })
 
-
   return (
     <ReactMapGL
       mapStyle="mapbox://styles/thasuka/cl5tlifb6001p14p9mlf1chan"
-      // mapboxApiAccessToken={process.env.mapbox_key}
-      mapboxAccessToken={process.env.mapbox_key}
+      mapboxApiAccessToken={process.env.mapbox_key}
       {...viewportValues}
-      // onViewportChange={(viewport:any) => setViewport(viewport)}
-      // onMove={(viewport) =>{
-      //   console.log('viewportviewport', viewport.viewState)
-      //   const teste = {...viewport}
+      width="100%"
+      height="100%"
+      onViewportChange={(viewport: any) => {
 
-      //   setViewport( (viewport) =>({
-      //     height: '100%',
-      //     width: '100%',
-      //     latitude: viewport.viewState.latitude,
-      //     longitude: -122.4376,
-      //     zoom: 11
-      //   })
-      // }}
 
-      onMove={(evt) => {
-        console.log('evt', evt)
         setViewportValues((viewportValues) => ({
           ...viewportValues,
-          latitude: evt.viewState.latitude,
-          longitude: evt.viewState.longitude,
-          zoom: evt.viewState.zoom
+          latitude: viewport?.latitude,
+          longitude: viewport?.longitude,
+          zoom: viewport?.zoom,
+
         }))
-      }
-      }
+      }}
     >
-      {placesSeachResults.map(result=> {
+      {placesSeachResults.map(result => {
         return (
 
           <div key={result.long}>
             <Marker
               longitude={result.long}
               latitude={result.lat}
-              offset={[-20,-10]}
-
+              offsetLeft={-20}
+              offsetTop={-10}
             >
-              <p className='cursor-pointer text-2xl hover:animate-bounce '>📌</p>
+              <p
+                role="img"
+                onClick={() => setSelectedLocation(result)}
+                className='cursor-pointer text-2xl hover:animate-bounce '
+                aria-label="push-puh"
+              >
+                📌
+              </p>
             </Marker>
+
+            {/* The popup */}
+            {selectedLocation.long === result.long
+              ? (
+                <Popup
+                  closeOnClick={true}
+                  onClose={() => setSelectedLocation({} as placeToRent)}
+                  latitude={result.lat}
+                  longitude={result.long}
+                >
+                  {result.title}
+                </Popup>
+
+              )
+              : (false)
+            }
           </div>
         )
       })}
